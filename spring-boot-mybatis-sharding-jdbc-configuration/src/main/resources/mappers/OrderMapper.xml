@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyncc.bazinga.dao.OrderDao">
+    <resultMap id="baseResultMap" type="com.lyncc.bazinga.model.Order">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order (user_id,amount,product_name,product_id) values (#{userId},#{amount},#{productName},#{productId})
+    </insert>
+
+    <insert id="batchInsert">
+        insert into t_order (user_id,amount,product_name,product_id) values
+        <foreach collection="orders" item="order" separator=",">
+            (#{order.userId},#{order.amount},#{order.productName},#{order.productId})
+        </foreach>
+    </insert>
+
+    <select id="findOrderByUseId" parameterType="java.lang.Integer" resultMap="baseResultMap">
+        select * from t_order where user_id = #{userId}
+    </select>
+    
+    
+    <select id="findOrdersByIds" resultMap="baseResultMap">
+        select * from t_order where user_id in (
+        <foreach collection="userIds" item="userId" separator=",">
+            #{userId}
+        </foreach>
+        )
+    </select>
+
+
+
+
+
+
+    
+</mapper>

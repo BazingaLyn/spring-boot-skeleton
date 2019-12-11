@@ -6,8 +6,8 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="amount" property="amount" jdbcType="DECIMAL"/>
         <result column="product_name" property="productName" jdbcType="VARCHAR"/>
-        <result column="product_id" property="productId" jdbcType="VARCHAR"/>
-        <result column="del_flag" property="status" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">

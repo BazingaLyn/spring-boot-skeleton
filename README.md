@@ -1,0 +1,1 @@
+**spring-boot-skeleton 用来整合几个比较常用的中间件**
